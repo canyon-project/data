@@ -25,5 +25,10 @@ jobs:
       - name: Build with wasm-pack
         run: wasm-pack build --target nodejs
 
+      - name: Configure npm auth
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > ~/.npmrc
+
       - name: Publish package
         run: wasm-pack publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
