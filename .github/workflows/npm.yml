@@ -23,7 +23,7 @@ jobs:
         run: cargo install wasm-pack
 
       - name: Build with wasm-pack
-        run: wasm-pack build --target nodejs
+        run: wasm-pack build --target nodejs --out-name index
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
