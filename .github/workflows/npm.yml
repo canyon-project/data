@@ -23,20 +23,7 @@ jobs:
         run: cargo install wasm-pack
 
       - name: Build with wasm-pack
-        run: wasm-pack build --target nodejs --out-name index
+        run: wasm-pack build --target nodejs
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20' # 使用你需要的 Node.js 版本
-
-      - name: Configure npm for publishing
-        run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}
-
-      - name: Install npm dependencies
-        run: npm install
-
-      - name: Publish to npm
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+      - name: Publish package
+        run: wasm-pack publish
