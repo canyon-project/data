@@ -10,7 +10,7 @@ checksum = "79296716171880943b8470b5f8d03aa55eb2e645a4874bdbb28adb49162e012c"
 
 [[package]]
 name = "canyon-data"
-version = "0.1.1-alpha.3"
+version = "0.1.1-alpha.5"
 dependencies = [
  "serde",
  "serde_json",
