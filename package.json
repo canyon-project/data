@@ -1,6 +1,5 @@
 {
   "name": "canyon-data",
-  "private": true,
   "version": "0.1.1-alpha.6",
   "type": "module",
   "main": "dist/canyon-data.cjs",
