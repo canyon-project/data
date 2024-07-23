@@ -24,23 +24,51 @@
  * @return {Object} 合并后的结果对象。请注意，输入对象不会被修改。
  */
 function mergeFileCoverage(first:any, second:any) {
+  first = {
+    b:{},
+    f:{},
+    s:{},
+    ...first
+  }
+  second = {
+    b:{},
+    f:{},
+    s:{},
+    ...second
+  }
   const ret = JSON.parse(JSON.stringify(first));
 
   delete ret.l; // 移除派生信息
 
   Object.keys(second.s).forEach(function (k) {
-    ret.s[k] += second.s[k];
+    if (ret.s[k]===undefined){
+      ret.s[k] = second.s[k];
+    } else {
+      ret.s[k] += second.s[k];
+    }
   });
 
   Object.keys(second.f).forEach(function (k) {
-    ret.f[k] += second.f[k];
+    if (ret.f[k]===undefined){
+      ret.f[k] = second.f[k];
+    } else {
+      ret.f[k] += second.f[k];
+    }
   });
 
   Object.keys(second.b).forEach(function (k) {
-    const retArray = ret.b[k];
-    const secondArray = second.b[k];
-    for (let i = 0; i < retArray.length; i += 1) {
-      retArray[i] += secondArray[i];
+    if (ret.b[k]===undefined){
+      ret.b[k] = JSON.parse(JSON.stringify(second.b[k]));
+    } else {
+      const retArray = ret.b[k];
+      const secondArray = second.b[k];
+      if (retArray){
+        if (retArray.length>0){
+          for (let i = 0; i < retArray.length; i += 1) {
+            retArray[i] += secondArray[i];
+          }
+        }
+      }
     }
   });
 
